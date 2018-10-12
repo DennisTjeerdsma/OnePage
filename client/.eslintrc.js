@@ -25,6 +25,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+      'no-console':'off',
     // don't require .vue extension when importing
     'import/extensions': ['error', 'always', {
       js: 'never',
@@ -44,7 +45,14 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', {
       optionalDependencies: ['test/unit/index.js']
     }],
+    // Indent with 4 spaces
+    "indent": ["error", 2],
+    
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
-  }
+  },
+
+
 }
+
+

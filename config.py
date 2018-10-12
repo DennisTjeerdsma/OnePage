@@ -1,3 +1,3 @@
 
-class Config(object):
+class Config(object): 
     test = "TEST"
