@@ -4,9 +4,6 @@
             <div class="col-sm-10">
                 <h1>Books</h1>
                 <hr><br><br>
-                <button type="button" class="bg-green-light hover:bg-green-dark rounded \
-                text-white px-4 py-2">Add</button>
-                <br><br>
                 <table class="text-left w-full">
                     <thead class="bg-black flex text-white w-full">
                         <tr class="flex w-full mb-4">
@@ -31,20 +28,35 @@
                                 rounded py-2 px-4">Delete</button>
                             </td>
                         </tr>
+                        <tr class="w-full">
+                            <td class="p-4 w-1/4"><button type="button"
+                             @click="toggleModal"
+                             class="bg-green-light hover:bg-green-dark rounded \
+                            text-white px-4 py-2">Add</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div v-if="modal" id="modal" @click.self="toggleModal" class="fixed pin z-50 \
+            overflow-auto bg-smoke-light flex">
+            <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex">
+                <button class="bg-red hover:bg-red-darker rounded text-white shadow-md py-2 px-4" 
+                    @click="toggleModal"></button>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<script type=text/javascript>
 import axios from 'axios';
 
 export default {
   data() {
     return {
       books: [],
+      modal: false,
     };
   },
   methods: {
@@ -57,6 +69,9 @@ export default {
         .catch((error) => {
           console.error(error);
         });
+    },
+    toggleModal() {
+      this.modal = !this.modal;
     },
   },
   created() {

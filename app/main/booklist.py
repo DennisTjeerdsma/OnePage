@@ -15,4 +15,3 @@ BOOKS = [
         "read": True
     }
 ]
-
