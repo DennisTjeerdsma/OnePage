@@ -39,11 +39,30 @@
                 </table>
             </div>
         </div>
-        <div v-if="modal" id="modal" @click.self="toggleModal" class="fixed pin z-50 \
-            overflow-auto bg-smoke-light flex">
-            <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex">
-                <button class="bg-red hover:bg-red-darker rounded text-white shadow-md py-2 px-4" 
-                    @click="toggleModal"></button>
+        <div v-if="BookModal.visible" id="BookModal" @click.self="toggleModal"
+        class="fixed pin z-50 overflow-auto bg-smoke-light flex">
+            <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded">
+                <form class="mb-4" @reset="onReset">
+                    <h1 class="text-decoration: underline">Add Books</h1><hr><br>
+                    <div>
+                        <label for="title">Title</label><br>
+                        <input type="text" name="title" id="title" class="border rounded"
+                         placeholder="Add book title here" required>
+                    </div><br>
+                    <div>
+                        <label for="author">Author</label><br>
+                        <input type="text" name="author" id="author" class="border rounded"
+                        placeholder="Add author here" required>
+                    </div><br>
+                        <label for="read">Read</label>
+                        <input type="checkbox" class="mr-2 leading-tight"><br><hr><br>
+                    <div>
+                    </div>
+                    <button class="bg-green hover:bg-green-darker rounded text-white \
+                     shadow-md py-2 px-4 w-1/3">Add</button>
+                    <button class="bg-red hover:bg-red-darker rounded text-white shadow-md py-2 \
+                    px-4 w-1/3" type="reset">Reset</button>
+                </form>
             </div>
         </div>
     </div>
@@ -56,7 +75,12 @@ export default {
   data() {
     return {
       books: [],
-      modal: false,
+      BookModal: {
+        title: '',
+        author: '',
+        read: [],
+        visible: false,
+      },
     };
   },
   methods: {
@@ -71,7 +95,15 @@ export default {
         });
     },
     toggleModal() {
-      this.modal = !this.modal;
+      this.BookModal.visible = !this.BookModal.visible;
+    },
+    initForm() {
+      this.BookModal.title = '';
+      this.BookModal.author = '';
+      this.BookModal.read = [];
+    },
+    onReset() {
+      this.initForm();
     },
   },
   created() {
