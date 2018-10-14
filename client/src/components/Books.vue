@@ -5,6 +5,7 @@
                 <h1>Books</h1>
                 <hr><br><br>
                 <table class="text-left w-full">
+                  <alert :message=message v-if="showMessage"></alert>
                     <thead class="bg-black flex text-white w-full">
                         <tr class="flex w-full mb-4">
                             <th scope="col" class="p-4 w-1/4">Title</th>
@@ -42,24 +43,25 @@
         <div v-if="BookModal.visible" id="BookModal" @click.self="toggleModal"
         class="fixed pin z-50 overflow-auto bg-smoke-light flex">
             <div class="relative p-8 bg-white w-full max-w-md m-auto flex-col flex rounded">
-                <form class="mb-4" @reset="onReset">
+                <form class="mb-4" @reset.prevent="onReset" @submit.prevent="onSubmit">
                     <h1 class="text-decoration: underline">Add Books</h1><hr><br>
                     <div>
                         <label for="title">Title</label><br>
                         <input type="text" name="title" id="title" class="border rounded"
-                         placeholder="Add book title here" required>
+                         placeholder="Add book title here" required v-model="BookModal.title">
                     </div><br>
                     <div>
                         <label for="author">Author</label><br>
                         <input type="text" name="author" id="author" class="border rounded"
-                        placeholder="Add author here" required>
+                        placeholder="Add author here" required v-model="BookModal.author">
                     </div><br>
                         <label for="read">Read</label>
-                        <input type="checkbox" class="mr-2 leading-tight"><br><hr><br>
+                        <input type="checkbox" class="mr-2 leading-tight" v-model="BookModal.read"
+                        ><br><hr><br>
                     <div>
                     </div>
                     <button class="bg-green hover:bg-green-darker rounded text-white \
-                     shadow-md py-2 px-4 w-1/3">Add</button>
+                     shadow-md py-2 px-4 w-1/3" type='submit'>Add</button>
                     <button class="bg-red hover:bg-red-darker rounded text-white shadow-md py-2 \
                     px-4 w-1/3" type="reset">Reset</button>
                 </form>
@@ -69,8 +71,12 @@
 </template>
 
 <script type=text/javascript>
-import axios from 'axios';
 
+// Importing
+import axios from 'axios';
+import Alert from './Alert';
+
+// Generate Javascript functions
 export default {
   data() {
     return {
@@ -81,7 +87,12 @@ export default {
         read: [],
         visible: false,
       },
+      message: '',
+      showMessage: false,
     };
+  },
+  components: {
+    alert: Alert,
   },
   methods: {
     getBooks() {
@@ -104,6 +115,31 @@ export default {
     },
     onReset() {
       this.initForm();
+    },
+    onSubmit() {
+      let read = false;
+      if (this.BookModal.read[0]) read = true;
+      const payload = {
+        title: this.BookModal.title,
+        author: this.BookModal.title,
+        read,
+      };
+      this.addBook(payload);
+      this.initForm();
+      this.toggleModal();
+    },
+    addBook(payload) {
+      const path = 'http://localhost:5000/books';
+      axios.post(path, payload)
+        .then(() => {
+          this.message = 'Book added!';
+          this.showMessage = true;
+          this.getBooks();
+        })
+        .catch((error) => {
+          console.log(error);
+          this.getBooks();
+        });
     },
   },
   created() {

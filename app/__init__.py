@@ -13,7 +13,6 @@ def create_app(config_class=Config):
     app.register_blueprint(routes_bp)
 
     #Initializing CORS
-    CORS(app)
+    CORS(app, support_crendentials=True)
 
-    
     return app
