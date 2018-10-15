@@ -46,7 +46,7 @@ module.exports = {
       optionalDependencies: ['test/unit/index.js']
     }],
     // Indent with 4 spaces
-    "indent": ["error", 2],
+    "indent": "off",
     
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'

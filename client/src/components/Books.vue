@@ -5,7 +5,12 @@
                 <h1>Books</h1>
                 <hr><br><br>
                 <table class="text-left w-full">
-                  <alert :message=message v-if="showMessage"></alert>
+                  <div class="bg-green-lightest border border-green-light text-green-dark \
+                  px-4 py-3 rounded relative" role="alert" id="alert" v-if="showMessage">
+                    <div class="font-bold">
+                      <alert :message="message">{{ message }}</alert>
+                    </div>
+                  </div>
                     <thead class="bg-black flex text-white w-full">
                         <tr class="flex w-full mb-4">
                             <th scope="col" class="p-4 w-1/4">Title</th>
@@ -74,7 +79,6 @@
 
 // Importing
 import axios from 'axios';
-import Alert from './Alert';
 
 // Generate Javascript functions
 export default {
@@ -90,9 +94,6 @@ export default {
       message: '',
       showMessage: false,
     };
-  },
-  components: {
-    alert: Alert,
   },
   methods: {
     getBooks() {
