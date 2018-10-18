@@ -1,16 +1,16 @@
-<template>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-10">
+<template class="w-full">
+    <div class="container w-screen flex flex-wrap mx-auto">
+        <div class="row w-full">
+            <div class="col-sm-10 w-full">
                 <h1>Books</h1>
                 <hr><br><br>
                 <table class="text-left w-full">
                   <div class="bg-green-lightest border border-green-light text-green-dark \
                   px-4 py-3 rounded relative" role="alert" id="alert" v-if="showMessage">
-                    <div class="font-bold">
+                    <div class="font-bold w-full">
                       <alert :message="message">{{ message }}</alert>
                     </div>
-                  </div>
+                  </div><br>
                     <thead class="bg-black flex text-white w-full">
                         <tr class="flex w-full mb-4">
                             <th scope="col" class="p-4 w-1/4">Title</th>
@@ -122,7 +122,7 @@ export default {
       if (this.BookModal.read[0]) read = true;
       const payload = {
         title: this.BookModal.title,
-        author: this.BookModal.title,
+        author: this.BookModal.author,
         read,
       };
       this.addBook(payload);

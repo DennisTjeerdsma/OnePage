@@ -3,9 +3,11 @@ from config import Config
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from flask_marshmallow import Marshmallow
 
 db = SQLAlchemy()
 migrate = Migrate()
+marshmallow = Marshmallow()
 
 def create_app(config_class=Config):
     #App setup
@@ -16,6 +18,7 @@ def create_app(config_class=Config):
     # Initializing app
     db.init_app(app)
     migrate.init_app(app, db)
+    marshmallow.init_app(app)
 
     #Registring blueprints
     from app.main import routes_bp

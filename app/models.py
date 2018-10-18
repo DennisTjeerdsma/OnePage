@@ -1,4 +1,9 @@
-from app import db
+from app import db, marshmallow
+
+
+class BookSchema(marshmallow.Schema):
+    class Meta:
+        fields = ("title", "author", "read")
 
 
 class Book(db.Model):
@@ -9,3 +14,10 @@ class Book(db.Model):
 
     def __repr(self):
         return "Book id: {}".format(self.id)
+
+    @staticmethod
+    def book_dict_list():
+        book_list = Book.query.all()
+        bookschema = BookSchema(many=True)
+        book_dict = bookschema.dump(book_list)
+        return book_dict
