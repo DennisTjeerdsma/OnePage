@@ -6,9 +6,9 @@
                 <hr><br><br>
                 <table class="text-left w-full">
                   <div class="bg-green-lightest border border-green-light text-green-dark \
-                  px-4 py-3 rounded relative" role="alert" id="alert" v-if="showMessage">
+                  px-4 py-3 rounded relative" role="alert" id="alert" v-if="Alert.showMessage">
                     <div class="font-bold w-full">
-                      <alert :message="message">{{ message }}</alert>
+                      <alert :message="Alert.message">{{ message }}</alert>
                     </div>
                   </div><br>
                     <thead class="bg-black flex text-white w-full">
@@ -29,7 +29,7 @@
                             </td>
                             <td>
                                 <button type="button" class="bg-blue hover:bg-blue-darker \
-                                rounded text-white shadow-md py-2 px-4">Update</button>
+                                rounded text-white shadow-md py-2 px-4" @click="toggleModal">Update</button>
                                 <button type="button" class="bg-red hover:bg-red-darker text-white \
                                 rounded py-2 px-4">Delete</button>
                             </td>
@@ -62,7 +62,8 @@
                     </div><br>
                         <label for="read">Read</label>
                         <input type="checkbox" class="mr-2 leading-tight" v-model="BookModal.read"
-                        ><br><hr><br>
+                        id="read" name="read" value="true">
+                        <br><hr><br>
                     <div>
                     </div>
                     <button class="bg-green hover:bg-green-darker rounded text-white \
@@ -91,8 +92,11 @@ export default {
         read: [],
         visible: false,
       },
-      message: '',
-      showMessage: false,
+      Alert: {
+        message: '',
+        showMessage: false,
+        dismissable: false,
+      },
     };
   },
   methods: {
@@ -108,6 +112,7 @@ export default {
     },
     toggleModal() {
       this.BookModal.visible = !this.BookModal.visible;
+
     },
     initForm() {
       this.BookModal.title = '';
@@ -133,8 +138,8 @@ export default {
       const path = 'http://localhost:5000/books';
       axios.post(path, payload)
         .then(() => {
-          this.message = 'Book added!';
-          this.showMessage = true;
+          this.Alert.message = 'Book added!';
+          this.Alert.showMessage = true;
           this.getBooks();
         })
         .catch((error) => {

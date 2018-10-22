@@ -3,6 +3,7 @@ from flask import jsonify, request, current_app
 from app.models import Book
 from app.main.booklist import BOOKS
 from app import db
+import sys
 
 @routes_bp.route('/books', methods=['GET', 'POST'])
 def all_books():
@@ -10,7 +11,7 @@ def all_books():
     if request.method == "POST":
         add_book = Book(title=request.json.get("title", ""),
                         author=request.json.get("author", ""),
-                        read=request.json.get("read", )
+                        read=request.json.get("read", "")
                         )
         db.session.add(add_book)
         db.session.commit()

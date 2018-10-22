@@ -11,5 +11,6 @@
     },
     "[vue]":{
         "editor.tabSize":2
-    }
+    },
+    "python.jediEnabled": false
   }

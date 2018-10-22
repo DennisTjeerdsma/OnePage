@@ -1,5 +1,7 @@
 alembic==1.0.0
 astroid==2.0.4
+atomicwrites==1.2.1
+attrs==18.2.0
 Click==7.0
 Flask==1.0.2
 Flask-Cors==3.0.6
@@ -15,7 +17,11 @@ MarkupSafe==1.0
 marshmallow==2.16.0
 marshmallow-sqlalchemy==0.14.1
 mccabe==0.6.1
+more-itertools==4.3.0
+pluggy==0.8.0
+py==1.7.0
 pylint==2.1.1
+pytest==3.9.1
 python-dateutil==2.7.3
 python-editor==1.0.3
 six==1.11.0
