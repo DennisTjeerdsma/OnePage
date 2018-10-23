@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <router-link to="/">Books</router-link>
+    <router-link to="/dus">Dus</router-link>
     <router-view/>
   </div>
 </template>
@@ -20,4 +22,3 @@ export default {
   margin-top: 60px;
 }
 </style>
-

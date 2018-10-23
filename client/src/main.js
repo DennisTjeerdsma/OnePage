@@ -11,6 +11,7 @@ import router from './router';
 
 Vue.config.productionTip = false;
 
+/* Initiate components */
 
 /* eslint-disable no-new */
 new Vue({

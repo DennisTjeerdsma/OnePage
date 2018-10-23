@@ -1,7 +1,7 @@
 from app.main import routes_bp
 from app.models import Book
 from flask import request, jsonify
-from removebook import remove_book
+from app.main.routes.removebook import remove_book
 
 @routes_bp.route("/books/<book_id>", methods=["PUT"])
 def update_book(book_id):

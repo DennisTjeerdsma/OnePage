@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Ping from '@/components/Ping';
 import Books from '@/components/Books';
+import Dus from '@/components/Dus';
 
 Vue.use(Router);
 
@@ -13,9 +13,9 @@ export default new Router({
       component: Books,
     },
     {
-      path: '/ping',
-      name: 'Ping',
-      component: Ping,
+      path: '/dus',
+      name: 'Dus',
+      component: Dus,
     },
   ],
   mode: 'hash',
