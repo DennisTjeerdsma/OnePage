@@ -45,7 +45,7 @@
                 </table>
             </div>
         </div>
-        <book-modal v-show="isModalVisible" @close='closeModal' @getbooks='getBooks'/>
+        <book-modal v-show="isModalVisible" @close='closeModal' @added='addBook'/>
     </div>
 </template>
 
@@ -86,8 +86,18 @@ export default {
       this.isModalVisible = true;
     },
     closeModal() {
-      this.getBooks();
       this.isModalVisible = false;
+    },
+    addBook(payload) {
+      const path = 'http://localhost:5000/books';
+      axios.post(path, payload)
+        .then(() => {
+          this.books.push(payload);
+          console.log('added', payload);
+        })
+        .catch((error) => {
+          console.log(error);
+      });
     },
   },
   created() {
