@@ -7,27 +7,26 @@
 </template>
 
 <script>
-
 /* Importing */
-import TestModal from '@/components/TestModal';
+import TestModal from '@/components/TestModal'
 
 export default {
   name: 'Dus',
   components: {
-    TestModal,
+    TestModal
   },
   data() {
     return {
-      isModalVisible: false,
-    };
+      isModalVisible: false
+    }
   },
   methods: {
     showModal() {
-      this.isModalVisible = true;
+      this.isModalVisible = true
     },
     closeModal() {
-      this.isModalVisible = false;
-    },
-  },
-};
+      this.isModalVisible = false
+    }
+  }
+}
 </script>
